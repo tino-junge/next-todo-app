@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { TodosProvider } from '../context/todosContext';
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -10,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <Component {...pageProps} />
+      <TodosProvider>
+        <Component {...pageProps} />
+      </TodosProvider>
     </>
   );
 }
