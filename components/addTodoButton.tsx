@@ -15,17 +15,17 @@ import { DatePicker } from './datePicker';
 export function AddTodoButton() {
   const { addTodo } = useTodosContext();
   const { enqueueSnackbar } = useSnackbar();
-  const [open, setOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFormInvalid, setIsFormInvalid] = useState(false);
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setIsDialogOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsDialogOpen(false);
   };
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -44,7 +44,7 @@ export function AddTodoButton() {
       return;
     }
     addTodo(description, dueDate);
-    setOpen(false);
+    setIsDialogOpen(false);
     resetForm();
     enqueueSnackbar('Todo created!', {
       variant: 'success',
@@ -65,7 +65,7 @@ export function AddTodoButton() {
         <Button variant="contained" onClick={handleClickOpen}>
           Add
         </Button>
-        <Dialog open={open} onClose={handleClose} maxWidth="lg">
+        <Dialog open={isDialogOpen} onClose={handleClose} maxWidth="lg">
           <DialogTitle>Add a new ToDo</DialogTitle>
           <DialogContent>
             <TextField
