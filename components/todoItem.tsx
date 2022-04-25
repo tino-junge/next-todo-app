@@ -62,9 +62,14 @@ export function TodoItem(props: TodoItemProps) {
         <Typography
           mr={5}
           textOverflow="ellipsis"
-          width={250}
           overflow="hidden"
           whiteSpace="nowrap"
+          sx={(theme) => ({
+            width: 50,
+            [theme.breakpoints.up('sm')]: {
+              width: 250,
+            },
+          })}
         >
           {getTodoSummary(todo)}
         </Typography>
