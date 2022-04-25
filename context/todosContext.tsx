@@ -1,4 +1,4 @@
-import { createContext, FC, useCallback, useContext, useState } from 'react';
+import { createContext, FC, useContext, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { Todo } from '../types/todo';
@@ -22,25 +22,32 @@ interface TodoProviderProps {
 export const TodosProvider: FC<TodoProviderProps> = ({ children }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = useCallback(
-    (description: string, dueDate: Date) =>
-      setTodos([
-        ...todos,
-        {
-          id: uuid(),
-          description,
-          dueDate,
-          status: 'upcoming',
-        },
-      ]),
-    [todos]
-  );
+  // To handle multiple todo notifications we use a reference here.
+  // It allows us to reference the latest version of our list
+  // e.g. when completing a todo that has been created earlier
+  const todosRef = useRef(todos);
 
-  const completeTodo = useCallback(
-    (todoId: string) =>
-      setTodos(todos.map((t) => (t.id === todoId ? { ...t, status: 'completed' } : t))),
-    [todos]
-  );
+  const addTodo = (description: string, dueDate: Date) => {
+    const updatedTodos: Todo[] = [
+      ...todosRef.current,
+      {
+        id: uuid(),
+        description,
+        dueDate,
+        status: 'upcoming',
+      },
+    ];
+    setTodos(updatedTodos);
+    todosRef.current = updatedTodos;
+  };
+
+  const completeTodo = (todoId: string) => {
+    const updatedTodos: Todo[] = todosRef.current.map((t) =>
+      t.id === todoId ? { ...t, status: 'completed' } : t
+    );
+    setTodos(updatedTodos);
+    todosRef.current = updatedTodos;
+  };
 
   return (
     <TodosContext.Provider

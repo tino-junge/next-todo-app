@@ -9,6 +9,7 @@ import intlFormat from 'date-fns/intlFormat';
 import { SnackbarKey, useSnackbar } from 'notistack';
 
 import { useTodosContext } from '../context/todosContext';
+import { getTodoSummary } from '../helpers/todoHelpers';
 import { useTimeout } from '../hooks/useTimeout';
 import { Todo } from '../types/todo';
 
@@ -21,35 +22,32 @@ export function TodoItem(props: TodoItemProps) {
   const { completeTodo } = useTodosContext();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const now = new Date().getTime();
-  const expTime = todo.dueDate.getTime();
-
-  // TODO notifiction component
-  const action = (key?: SnackbarKey) => (
-    <Button
-      onClick={() => {
-        completeTodo(todo.id);
-        closeSnackbar(key);
-      }}
-    >
-      Mark as complete
-    </Button>
-  );
   const showNotification = () => {
     if (todo.status === 'completed') {
       return;
     }
-    // TODO todo title prop!
-    enqueueSnackbar(todo.description, {
+    enqueueSnackbar(getTodoSummary(todo), {
+      key: todo.id,
+      variant: 'default',
       persist: true,
       preventDuplicate: true,
-      action,
+      action: (key?: SnackbarKey) => (
+        <Button
+          onClick={() => {
+            completeTodo(todo.id);
+            closeSnackbar(key);
+          }}
+        >
+          Mark as complete
+        </Button>
+      ),
     });
   };
 
-  // TODO show notification for todo item when dueDate in the past?
-  const timeoutTime = expTime - now;
-  useTimeout(showNotification, timeoutTime);
+  const nowTime = new Date().getTime();
+  const dueTime = todo.dueDate.getTime();
+  const timeoutDelay = dueTime - nowTime;
+  useTimeout(showNotification, timeoutDelay);
 
   return (
     <Accordion>
@@ -62,13 +60,13 @@ export function TodoItem(props: TodoItemProps) {
         }}
       >
         <Typography
-          mr={10}
+          mr={5}
           textOverflow="ellipsis"
-          maxWidth={100}
+          width={250}
           overflow="hidden"
           whiteSpace="nowrap"
         >
-          {todo.description}
+          {getTodoSummary(todo)}
         </Typography>
         <Typography>
           Due:{' '}
