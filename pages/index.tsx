@@ -4,10 +4,11 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import type { NextPage } from 'next';
 
+import AddTodoButton from '../components/addTodoButton';
 import { useTodosContext } from '../context/todosContext';
 
 const Home: NextPage = () => {
-  const { todos, addTodo, completeTodo } = useTodosContext();
+  const { todos, completeTodo } = useTodosContext();
   return (
     <Container maxWidth="lg">
       <Box
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           The Next ToDo App
         </Typography>
-        <Button onClick={() => addTodo((Math.random() + 1).toString(36).substring(7))}>Add</Button>
+        <AddTodoButton />
         <div>
           Upcoming
           {/* TODO selector */}
