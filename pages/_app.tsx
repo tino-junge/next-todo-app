@@ -1,9 +1,10 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { NotificationProvider } from '../context/notificationContext';
 import { TodosProvider } from '../context/todosContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function TodoApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -13,10 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <TodosProvider>
-        <Component {...pageProps} />
+        <NotificationProvider>
+          <Component {...pageProps} />
+        </NotificationProvider>
       </TodosProvider>
     </>
   );
 }
 
-export default MyApp;
+export default TodoApp;

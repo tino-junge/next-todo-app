@@ -22,6 +22,7 @@ specifiers:
   eslint-plugin-simple-import-sort: ^7.0.0
   eslint-plugin-unused-imports: ^2.0.0
   next: 12.1.5
+  notistack: ^2.0.4
   prettier: ^2.6.2
   react: 18.0.0
   react-dom: 18.0.0
@@ -39,6 +40,7 @@ dependencies:
   '@mui/x-date-pickers': 5.0.0-alpha.1_92c4d75e23cf6f2a433b1123aa12c255
   date-fns: 2.28.0
   next: 12.1.5_cba0cb7a45c5be1acc73e969c348db7f
+  notistack: 2.0.4_34c6212647451bc2f58a42b7a7c91125
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
   uuid: 8.3.2
@@ -2295,6 +2297,29 @@ packages:
 
   /node-releases/2.0.3:
     resolution: {integrity: sha512-maHFz6OLqYxz+VQyCAtA3PTX4UP/53pa05fyDNc9CwjvJ0yEh6+xBwKsgCxMNhS8taUKBFYxfuiaD9U/55iFaw==}
+    dev: false
+
+  /notistack/2.0.4_34c6212647451bc2f58a42b7a7c91125:
+    resolution: {integrity: sha512-kOJmKvTG91ElMzi4aHu82BDe1liQ0zMrBp+TnWJptgowDsTbeTKbZmsRqJNIj145BmlOtZsEE9xjcrN46zVo3w==}
+    peerDependencies:
+      '@emotion/react': ^11.4.1
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.9.0_e7c53be29d0cf33e05dfabbe0af5a24f
+      '@emotion/styled': 11.8.1_0f162aecff6af21058626542244d3733
+      '@mui/material': 5.6.2_6a30a1b8e94d7c7ed70667bc3922d17f
+      clsx: 1.1.1
+      hoist-non-react-statics: 3.3.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
   /object-assign/4.1.1:
