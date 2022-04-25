@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField';
 import { ChangeEvent, useState } from 'react';
 
 import { useTodosContext } from '../context/todosContext';
-import DatePicker from './datePicker';
+import { DatePicker } from './datePicker';
 
-export default function AddTodoButton() {
+export function AddTodoButton() {
   const { addTodo } = useTodosContext();
   const [open, setOpen] = useState(false);
   const [isFormInvalid, setIsFormInvalid] = useState(false);

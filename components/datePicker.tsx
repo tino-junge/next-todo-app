@@ -11,7 +11,7 @@ interface DateTimePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-export default function DatePicker(props: DateTimePickerProps) {
+export function DatePicker(props: DateTimePickerProps) {
   return (
     <Box my={3}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>

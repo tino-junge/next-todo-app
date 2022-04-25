@@ -9,14 +9,14 @@ import intlFormat from 'date-fns/intlFormat';
 import { SnackbarKey, useSnackbar } from 'notistack';
 
 import { useTodosContext } from '../context/todosContext';
-import useTimeout from '../hooks/useTimeout';
+import { useTimeout } from '../hooks/useTimeout';
 import { Todo } from '../types/todo';
 
 interface TodoItemProps {
   todo: Todo;
 }
 
-export default function TodoItem(props: TodoItemProps) {
+export function TodoItem(props: TodoItemProps) {
   const { todo } = props;
   const { completeTodo } = useTodosContext();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

@@ -3,14 +3,14 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { Todo } from '../types/todo';
-import TodoItem from './todoItem';
+import { TodoItem } from './todoItem';
 
 interface TodoListProps {
   title: string;
   todos: Todo[];
 }
 
-export default function TodoList(props: TodoListProps) {
+export function TodoList(props: TodoListProps) {
   return (
     <Container maxWidth="md">
       <Box
@@ -20,6 +20,7 @@ export default function TodoList(props: TodoListProps) {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'left',
+          minWidth: 300,
         }}
       >
         <Typography variant="h5" component="h5" gutterBottom>
