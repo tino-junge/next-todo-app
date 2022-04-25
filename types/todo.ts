@@ -1,6 +1,6 @@
 export type Todo = {
   id: string;
   description: string;
-  // TODO due date
+  dueDate: Date;
   status: 'upcoming' | 'completed';
 };

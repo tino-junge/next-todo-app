@@ -5,7 +5,7 @@ import { Todo } from '../types/todo';
 
 interface TodosContextProps {
   todos: Todo[];
-  addTodo: (description: string) => void;
+  addTodo: (description: string, dueDate: Date) => void;
   completeTodo: (todoId: string) => void;
 }
 
@@ -23,12 +23,13 @@ export const TodosProvider: FC<TodoProviderProps> = ({ children }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = useCallback(
-    (description: string) =>
+    (description: string, dueDate: Date) =>
       setTodos([
         ...todos,
         {
           id: uuid(),
           description,
+          dueDate,
           status: 'upcoming',
         },
       ]),
