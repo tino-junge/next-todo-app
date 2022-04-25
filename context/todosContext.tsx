@@ -1,12 +1,7 @@
 import { createContext, FC, useCallback, useContext, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-type Todo = {
-  id: string;
-  description: string;
-  // TODO due date
-  status: 'upcoming' | 'completed';
-};
+import { Todo } from '../types/todo';
 
 interface TodosContextProps {
   todos: Todo[];

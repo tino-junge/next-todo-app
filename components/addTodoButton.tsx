@@ -11,6 +11,7 @@ import { useTodosContext } from '../context/todosContext';
 export default function AddTodoButton() {
   const { addTodo } = useTodosContext();
   const [open, setOpen] = useState(false);
+  const [isFormInvalid, setIsFormInvalid] = useState(false);
   const [description, setDescription] = useState('');
 
   const handleClickOpen = () => {
@@ -22,10 +23,15 @@ export default function AddTodoButton() {
   };
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (isFormInvalid) setIsFormInvalid(false);
     setDescription(e.currentTarget.value);
   };
 
   const handleAdd = () => {
+    if (!description) {
+      setIsFormInvalid(true);
+      return;
+    }
     addTodo(description);
     setOpen(false);
     setDescription('');
@@ -48,6 +54,7 @@ export default function AddTodoButton() {
             fullWidth
             variant="standard"
             onChange={handleDescriptionChange}
+            error={isFormInvalid}
           />
         </DialogContent>
         <DialogActions>

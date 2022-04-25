@@ -1,14 +1,13 @@
-import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import type { NextPage } from 'next';
 
 import AddTodoButton from '../components/addTodoButton';
+import TodoList from '../components/todoList';
 import { useTodosContext } from '../context/todosContext';
 
 const Home: NextPage = () => {
-  const { todos, completeTodo } = useTodosContext();
+  const { todos } = useTodosContext();
   return (
     <Container maxWidth="lg">
       <Box
@@ -20,32 +19,9 @@ const Home: NextPage = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom>
-          The Next ToDo App
-        </Typography>
         <AddTodoButton />
-        <div>
-          Upcoming
-          {/* TODO selector */}
-          {todos
-            .filter((t) => t.status === 'upcoming')
-            .map((todo, i) => {
-              return (
-                <div key={i}>
-                  {todo.description} <Button onClick={() => completeTodo(todo.id)}>Done</Button>
-                </div>
-              );
-            })}
-        </div>
-        <div>
-          Completed
-          {/* TODO selector */}
-          {todos
-            .filter((t) => t.status === 'completed')
-            .map((todo, i) => {
-              return <div key={i}>{todo.description}</div>;
-            })}
-        </div>
+        <TodoList title="Upcoming" todos={todos.filter((t) => t.status === 'upcoming')} />
+        <TodoList title="Completed" todos={todos.filter((t) => t.status === 'completed')} />
       </Box>
     </Container>
   );
