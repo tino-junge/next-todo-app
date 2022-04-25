@@ -7,7 +7,7 @@ import type { NextPage } from 'next';
 import { useTodosContext } from '../context/todosContext';
 
 const Home: NextPage = () => {
-  const { todos, addTodo } = useTodosContext();
+  const { todos, addTodo, completeTodo } = useTodosContext();
   return (
     <Container maxWidth="lg">
       <Box
@@ -22,12 +22,29 @@ const Home: NextPage = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           The Next ToDo App
         </Typography>
-        <Button onClick={() => addTodo({ description: 'new' })}>Add</Button>
-        <>
-          {todos.map((todo, i) => {
-            return <div key={i}>{todo.description}</div>;
-          })}
-        </>
+        <Button onClick={() => addTodo((Math.random() + 1).toString(36).substring(7))}>Add</Button>
+        <div>
+          Upcoming
+          {/* TODO selector */}
+          {todos
+            .filter((t) => t.status === 'upcoming')
+            .map((todo, i) => {
+              return (
+                <div key={i}>
+                  {todo.description} <Button onClick={() => completeTodo(todo.id)}>Done</Button>
+                </div>
+              );
+            })}
+        </div>
+        <div>
+          Completed
+          {/* TODO selector */}
+          {todos
+            .filter((t) => t.status === 'completed')
+            .map((todo, i) => {
+              return <div key={i}>{todo.description}</div>;
+            })}
+        </div>
       </Box>
     </Container>
   );
